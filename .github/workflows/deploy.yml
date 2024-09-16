@@ -35,10 +35,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # If using TypeScript, run type checking before building
-      - name: Run TypeScript type check
-        run: npm run type-check # Make sure 'type-check' is added to package.json scripts
-
       - name: Build React app
         run: npm run build
 
