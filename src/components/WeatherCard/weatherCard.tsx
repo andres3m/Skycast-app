@@ -2,6 +2,7 @@ import "./weatherCard.css";
 
 type WeatherAppProps = {
 	weatherData: weatherDataType;
+	onDelete: (location: string) => void;
 };
 
 type weatherDataType = {
@@ -14,8 +15,7 @@ type weatherDataType = {
 	icon: string;
 };
 
-export function WeatherCard(props: WeatherAppProps) {
-	const { weatherData } = props;
+export function WeatherCard({weatherData, onDelete}: WeatherAppProps) {	
 
 	return (
 		
@@ -24,11 +24,11 @@ export function WeatherCard(props: WeatherAppProps) {
 				<h1>{weatherData.location}</h1>
 			</div>
 			<div className="Temp">
-				<h2>{weatherData.temperature}C</h2>
+				<h2>{weatherData.temperature}°C</h2>
 			</div>
 			<div className="Temps">
-				<p>Max: {weatherData.tempMax}C</p>
-				<p>Min: {weatherData.tempMin}C</p>
+				<p>Max: {weatherData.tempMax}°C</p>
+				<p>Min: {weatherData.tempMin}°C</p>
 			</div>
 			<div className="iconDesc">
 				<img
@@ -36,6 +36,9 @@ export function WeatherCard(props: WeatherAppProps) {
 					alt={weatherData.description}
 				/>
 				<p>{weatherData.description}</p>
+			</div>
+			<div>
+			<button className="button-80" onClick={()=> onDelete(weatherData.location)}>❌</button>
 			</div>
 		</div>
 	);

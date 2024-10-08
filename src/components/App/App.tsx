@@ -53,17 +53,31 @@ function App() {
 		const newWeatherData = [...weatherData, cityWeatherData];
 		setWeatherData(newWeatherData);
 	}
+
+	function handleDelete(location: string) {
+		function removeLocation(weather: weatherDataType) {
+			//return weather.location !== location;
+			if (weather.location !== location) {
+				return true;
+			  } else {
+				return false;
+			  }
+		}
+	  
+		const updatedData = weatherData.filter(removeLocation);
+		setWeatherData(updatedData);
+	  }
 	
 
   return (
     <div className="App">
     <div className="inputDiv">
-      <input placeholder= "Enter location" type="text" onChange={onChange} value={cityInput}></input>
+      <input className="cityInput" placeholder= "Enter location" type="text" onChange={onChange} value={cityInput}></input>
       <button className="button-80" onClick={onClick}>Add location</button>
     </div>
     
     {weatherData.map((weatherData) => {
-      return <WeatherCard weatherData={weatherData}></WeatherCard>;
+      return <WeatherCard key={weatherData.location} weatherData={weatherData} onDelete={handleDelete}/>
     })}
     
   </div>
